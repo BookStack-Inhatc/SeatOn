@@ -3,14 +3,14 @@ package com.lms.seaton.view.panel;
 import com.lms.seaton.view.MainFrame;
 
 
-public class LoginPanel extends javax.swing.JPanel {
+public class SignUpPanel extends javax.swing.JPanel {
     private MainFrame frame;
-    
-     public LoginPanel() {
+
+    public SignUpPanel() {
         
     }
 
-    public LoginPanel(MainFrame frame) {
+    public SignUpPanel(MainFrame frame) {
         initComponents();
         this.frame = frame;
     }
@@ -22,7 +22,7 @@ public class LoginPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        jLabel1.setText("LOGIN PANEL");
+        jLabel1.setText("SIGNUP PANEL");
 
         jButton1.setText("뒤로가기");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -36,20 +36,20 @@ public class LoginPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(158, 158, 158)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jLabel1))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(93, 93, 93)
+                .addGap(91, 91, 91)
                 .addComponent(jButton1)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

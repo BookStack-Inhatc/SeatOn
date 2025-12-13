@@ -25,7 +25,7 @@ public class LoginPanel extends javax.swing.JPanel {
         lblPw = new javax.swing.JLabel();
         tbxNumber = new javax.swing.JTextField();
         tbxPw = new javax.swing.JTextField();
-        BtnLogin = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
         lblLogin = new javax.swing.JLabel();
         lblNumber = new javax.swing.JLabel();
         lblError = new javax.swing.JLabel();
@@ -77,12 +77,12 @@ public class LoginPanel extends javax.swing.JPanel {
         jPanel1.add(tbxPw);
         tbxPw.setBounds(120, 600, 240, 23);
 
-        BtnLogin.setBackground(new java.awt.Color(255, 204, 0));
-        BtnLogin.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
-        BtnLogin.setForeground(new java.awt.Color(0, 51, 102));
-        BtnLogin.setText("로그인");
-        jPanel1.add(BtnLogin);
-        BtnLogin.setBounds(370, 560, 100, 60);
+        btnLogin.setBackground(new java.awt.Color(255, 204, 0));
+        btnLogin.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(0, 51, 102));
+        btnLogin.setText("로그인");
+        jPanel1.add(btnLogin);
+        btnLogin.setBounds(370, 560, 100, 60);
 
         lblLogin.setFont(new java.awt.Font("맑은 고딕", 1, 24)); // NOI18N
         lblLogin.setForeground(new java.awt.Color(255, 204, 0));
@@ -114,14 +114,14 @@ public class LoginPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
@@ -135,8 +135,8 @@ public class LoginPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnLogin;
     private javax.swing.JButton btnGoBack;
+    private javax.swing.JButton btnLogin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblError;

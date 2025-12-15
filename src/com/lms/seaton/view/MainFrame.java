@@ -94,21 +94,45 @@ public class MainFrame extends javax.swing.JFrame {
         cardLayout.show(contentPane, previousPanelName);
     }
     public void showMainPanel(MemberDTO member) {
-        // 1. 기존 패널들(로그인, 시작화면 등)을 싹 지우고 메인 화면만 남깁니다.
-        // (로그인 성공했으므로 뒤로가기로 로그인창 갈 필요가 없음)
-        this.getContentPane().removeAll();
+        // 1. 로그인한 회원 정보를 담아서 메인 패널을 새로 만듭니다.
+        // 기존에 등록된 mainPanel이 있으면 제거해서 중복 추가를 방지합니다.
+        if (this.mainPanel != null) {
+            contentPane.remove(this.mainPanel);
+        }
+        this.mainPanel = new MainPanel(this, member);
 
-        // 2. 로그인한 회원 정보를 담아서 메인 패널을 새로 만듭니다.
-        MainPanel mainPanel = new MainPanel(this, member);
+        // 2. 메인 패널을 contentPane의 카드로 추가하고 전환합니다.
+        // 기존에 카드로 등록된 다른 패널들(START, SIGNUP, LOGIN)은 유지합니다.
+        contentPane.add(this.mainPanel, "MAIN");
+        cardLayout.show(contentPane, "MAIN");
 
-        // 3. 화면에 붙입니다.
-        this.add(mainPanel);
-
-        // 4. 화면을 새로고침해서 보여줍니다.
+        // 3. 화면을 새로고침해서 보여줍니다.
         this.revalidate();
         this.repaint();
         this.pack(); // 창 크기를 내용물에 맞게 자동 조절
     }
+    
+    public void logout() {
+        // 1) 로그인 패널의 입력 필드 초기화
+        if (loginPanel != null) {
+            loginPanel.clearFields();
+        }
+
+        // 2) 메인 패널이 있다면 제거하여 상태 정리
+        if (this.mainPanel != null) {
+            contentPane.remove(this.mainPanel);
+            this.mainPanel = null;
+        }
+
+        // 3) 카드 스택 및 화면 전환
+        historyStack.clear();
+        historyStack.push("LOGIN");
+        cardLayout.show(contentPane, "LOGIN");
+
+        revalidate();
+        repaint();
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

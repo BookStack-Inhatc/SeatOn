@@ -21,6 +21,13 @@ public class LoginPanel extends javax.swing.JPanel {
 
     }
 
+    // 로그아웃 시 로그인 입력창 초기화용 메서드
+    public void clearFields() {
+        if (tbxNumber != null) tbxNumber.setText("");
+        if (tbxPw != null) tbxPw.setText("");
+        if (lblError != null) lblError.setText("");
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

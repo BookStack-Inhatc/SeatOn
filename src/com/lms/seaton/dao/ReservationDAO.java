@@ -75,4 +75,27 @@ public class ReservationDAO {
         }
         return occupiedIds;
     }
+    public boolean returnItem(String type, String itemId, long memberId) {
+        String tableName = type.equals("사물함") ? "LOCKER_RESERVATIONS" : "SEAT_RESERVATIONS";
+        String colName = type.equals("사물함") ? "locker_id" : "seat_id";
+
+        // 조건: 해당 번호 + 내 회원ID + 아직 반납 안 된(NULL) 기록만 반납 가능
+        String sql = "UPDATE " + tableName + 
+                     " SET check_out_time = NOW() " +
+                     " WHERE " + colName + " = ? AND member_id = ? AND check_out_time IS NULL";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, itemId);
+            pstmt.setLong(2, memberId);
+            
+            // 업데이트된 줄이 1개 이상이면 성공 (내 자리가 맞다는 뜻)
+            return pstmt.executeUpdate() > 0;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

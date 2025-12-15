@@ -155,7 +155,7 @@ public class SignUpPanel extends javax.swing.JPanel {
         jPanel1.add(btnSubmit);
         btnSubmit.setBounds(360, 620, 110, 40);
         jPanel1.add(lblCaptchaImage);
-        lblCaptchaImage.setBounds(130, 480, 230, 60);
+        lblCaptchaImage.setBounds(140, 480, 220, 60);
         jPanel1.add(tbxCaptcha);
         tbxCaptcha.setBounds(130, 560, 340, 23);
 
@@ -166,6 +166,8 @@ public class SignUpPanel extends javax.swing.JPanel {
         lblInputCaptcha.setBounds(30, 560, 100, 17);
 
         btnCaptchaRefresh.setBackground(new java.awt.Color(255, 204, 0));
+        btnCaptchaRefresh.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
+        btnCaptchaRefresh.setForeground(new java.awt.Color(0, 51, 102));
         btnCaptchaRefresh.setText("새로고침");
         jPanel1.add(btnCaptchaRefresh);
         btnCaptchaRefresh.setBounds(360, 520, 110, 23);

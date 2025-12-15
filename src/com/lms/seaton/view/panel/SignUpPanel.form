@@ -263,7 +263,7 @@
         <Component class="javax.swing.JLabel" name="lblCaptchaImage">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="130" y="480" width="230" height="60"/>
+              <AbsoluteConstraints x="140" y="480" width="220" height="60"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -294,6 +294,12 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="cc" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="12" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="66" green="33" red="0" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#xc0c8;&#xb85c;&#xace0;&#xce68;"/>
           </Properties>

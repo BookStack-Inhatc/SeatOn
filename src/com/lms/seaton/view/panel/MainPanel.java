@@ -788,29 +788,52 @@ public class MainPanel extends javax.swing.JPanel {
     }
 
      private void processReservation(javax.swing.JButton btn, String type) {
-        // 1. 화면상에서 이미 빨간색이면 예약 불가
+        String seatName = btn.getText(); // "1", "스터디룸1" 등
+
+        // ---------------------------------------------------------
+        // Case 1: 이미 예약된 자리(빨간색)를 클릭 -> [반납 시도]
+        // ---------------------------------------------------------
         if (btn.getBackground() == java.awt.Color.RED) {
-            javax.swing.JOptionPane.showMessageDialog(this, "이미 예약된 " + type + "입니다.");
-            return;
+            int choice = javax.swing.JOptionPane.showConfirmDialog(this, 
+                    seatName + "번 " + type + "을(를) 반납(퇴실)하시겠습니까?",
+                    "반납 확인",
+                    javax.swing.JOptionPane.YES_NO_OPTION);
+
+            if (choice == javax.swing.JOptionPane.YES_OPTION) {
+                // DAO에게 반납 요청 (내 아이디로 예약된 건지 확인 포함)
+                boolean success = reservationDAO.returnItem(type, seatName, loggedInUser.getMemberId());
+
+                if (success) {
+                    // 성공 시 색상 초기화 (기본값으로 복구)
+                    btn.setBackground(null); 
+                    btn.setForeground(java.awt.Color.BLACK); // 글자색 검정
+                    javax.swing.JOptionPane.showMessageDialog(this, "반납이 완료되었습니다.");
+                } else {
+                    // 실패 시 (보통 남의 자리를 눌렀을 때)
+                    javax.swing.JOptionPane.showMessageDialog(this, "본인이 예약한 자리만 반납할 수 있습니다.");
+                }
+            }
+            return; // 반납 로직 끝
         }
 
-        String seatName = btn.getText(); // 예: "1"
+        // ---------------------------------------------------------
+        // Case 2: 빈 자리(기본색)를 클릭 -> [예약 시도]
+        // ---------------------------------------------------------
         int choice = javax.swing.JOptionPane.showConfirmDialog(this, 
                 seatName + "번 " + type + "을(를) 예약하시겠습니까?",
                 "예약 확인",
                 javax.swing.JOptionPane.YES_NO_OPTION);
 
         if (choice == javax.swing.JOptionPane.YES_OPTION) {
-            // [DB 연결] 실제 DB에 저장 시도
             boolean success = reservationDAO.insertReservation(type, seatName, loggedInUser.getMemberId());
             
             if (success) {
-                // 성공 시 화면도 빨간색으로 변경
+                // 성공 시 빨간색으로 변경
                 btn.setBackground(java.awt.Color.RED);
                 btn.setForeground(java.awt.Color.WHITE);
                 javax.swing.JOptionPane.showMessageDialog(this, "예약이 완료되었습니다!");
             } else {
-                javax.swing.JOptionPane.showMessageDialog(this, "예약 실패! (DB 오류 또는 이미 존재함)");
+                javax.swing.JOptionPane.showMessageDialog(this, "예약 실패! (이미 예약되었거나 DB 오류)");
             }
         }
     }

@@ -1,18 +1,27 @@
 package com.lms.seaton.view.panel;
 
 import com.lms.seaton.view.MainFrame;
-
+import com.lms.seaton.dto.MemberDTO;
+import com.lms.seaton.view.panel.MainPanel;
 
 public class MainPanel extends javax.swing.JPanel {
     private MainFrame frame;
+    private com.lms.seaton.dto.MemberDTO loggedInUser;
+    private com.lms.seaton.dao.ReservationDAO reservationDAO = new com.lms.seaton.dao.ReservationDAO();
 
     public MainPanel() {
         
     }
 
-    public MainPanel(MainFrame frame) {
-        initComponents();
+    public MainPanel(MainFrame frame, MemberDTO user) {
+         initComponents();
         this.frame = frame;
+        this.loggedInUser = user;
+        initButtonActions();
+        loadReservationStatus();
+        // [추가 3] 사용자 이름 환영 메시지 (테스트용)
+        System.out.println("현재 로그인 사용자: " + user.getName());
+
     }
 
 
@@ -751,6 +760,87 @@ public class MainPanel extends javax.swing.JPanel {
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("tab3");
     }// </editor-fold>//GEN-END:initComponents
+
+     private void initButtonActions() {
+        // 1. 자유석 탭 (jPanel1)의 모든 버튼 설정
+        for (java.awt.Component comp : jPanel1.getComponents()) {
+            if (comp instanceof javax.swing.JButton) {
+                javax.swing.JButton btn = (javax.swing.JButton) comp;
+                btn.addActionListener(e -> processReservation(btn, "좌석"));
+            }
+        }
+
+        // 2. 스터디룸 탭 (jPanel2)의 모든 버튼 설정
+        for (java.awt.Component comp : jPanel2.getComponents()) {
+            if (comp instanceof javax.swing.JButton) {
+                javax.swing.JButton btn = (javax.swing.JButton) comp;
+                btn.addActionListener(e -> processReservation(btn, "스터디룸"));
+            }
+        }
+
+        // 3. 사물함 탭 (jPanel3)의 모든 버튼 설정
+        for (java.awt.Component comp : jPanel3.getComponents()) {
+            if (comp instanceof javax.swing.JButton) {
+                javax.swing.JButton btn = (javax.swing.JButton) comp;
+                btn.addActionListener(e -> processReservation(btn, "사물함"));
+            }
+        }
+    }
+
+     private void processReservation(javax.swing.JButton btn, String type) {
+        // 1. 화면상에서 이미 빨간색이면 예약 불가
+        if (btn.getBackground() == java.awt.Color.RED) {
+            javax.swing.JOptionPane.showMessageDialog(this, "이미 예약된 " + type + "입니다.");
+            return;
+        }
+
+        String seatName = btn.getText(); // 예: "1"
+        int choice = javax.swing.JOptionPane.showConfirmDialog(this, 
+                seatName + "번 " + type + "을(를) 예약하시겠습니까?",
+                "예약 확인",
+                javax.swing.JOptionPane.YES_NO_OPTION);
+
+        if (choice == javax.swing.JOptionPane.YES_OPTION) {
+            // [DB 연결] 실제 DB에 저장 시도
+            boolean success = reservationDAO.insertReservation(type, seatName, loggedInUser.getMemberId());
+            
+            if (success) {
+                // 성공 시 화면도 빨간색으로 변경
+                btn.setBackground(java.awt.Color.RED);
+                btn.setForeground(java.awt.Color.WHITE);
+                javax.swing.JOptionPane.showMessageDialog(this, "예약이 완료되었습니다!");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "예약 실패! (DB 오류 또는 이미 존재함)");
+            }
+        }
+    }
+
+     public void loadReservationStatus() {
+        // 1. DB에서 현재 사용 중인 좌석/스터디룸/사물함 번호 명단 가져오기
+        java.util.Set<String> occupiedSeats = reservationDAO.getOccupiedIds("좌석");
+        java.util.Set<String> occupiedLockers = reservationDAO.getOccupiedIds("사물함");
+        
+        // 2. 좌석 & 스터디룸 버튼들 검사 (jPanel1, jPanel2)
+        // (참고: 스터디룸도 SEAT_RESERVATIONS 테이블을 쓴다고 가정)
+        checkAndColorButtons(jPanel1, occupiedSeats);
+        checkAndColorButtons(jPanel2, occupiedSeats);
+
+        // 3. 사물함 버튼들 검사 (jPanel3)
+        checkAndColorButtons(jPanel3, occupiedLockers);
+    }
+
+     private void checkAndColorButtons(javax.swing.JPanel panel, java.util.Set<String> occupiedIds) {
+        for (java.awt.Component comp : panel.getComponents()) {
+            if (comp instanceof javax.swing.JButton) {
+                javax.swing.JButton btn = (javax.swing.JButton) comp;
+                // 만약 버튼 이름(예: "1")이 명단에 있다면 빨간색으로!
+                if (occupiedIds.contains(btn.getText())) {
+                    btn.setBackground(java.awt.Color.RED);
+                    btn.setForeground(java.awt.Color.WHITE);
+                }
+            }
+        }
+    }
 
     private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
         frame.goBack();

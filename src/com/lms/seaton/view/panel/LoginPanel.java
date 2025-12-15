@@ -1,18 +1,24 @@
 package com.lms.seaton.view.panel;
 
 import com.lms.seaton.view.MainFrame;
-
+import com.lms.seaton.service.MemberService;
+import com.lms.seaton.dto.MemberDTO;
+import javax.swing.JOptionPane;
 
 public class LoginPanel extends javax.swing.JPanel {
-    private MainFrame frame;
-    
+     private MainFrame frame;
+     private MemberService memberService = new MemberService();
+
      public LoginPanel() {
-        
+          initComponents();
+
     }
 
     public LoginPanel(MainFrame frame) {
         initComponents();
         this.frame = frame;
+          lblError.setText("");
+
     }
 
     @SuppressWarnings("unchecked")
@@ -81,6 +87,11 @@ public class LoginPanel extends javax.swing.JPanel {
         btnLogin.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(0, 51, 102));
         btnLogin.setText("로그인");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnLogin);
         btnLogin.setBounds(370, 560, 100, 60);
 
@@ -132,6 +143,33 @@ public class LoginPanel extends javax.swing.JPanel {
     private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
         frame.goBack();
     }//GEN-LAST:event_btnGoBackActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+       String phone = tbxNumber.getText().trim(); 
+        
+        // [수정 4] getPassword() -> getText() 로 변경 (JTextField를 사용중이므로)
+        String pw = tbxPw.getText().trim(); 
+
+        if (phone.isEmpty() || pw.isEmpty()) {
+            lblError.setForeground(java.awt.Color.RED);
+            lblError.setText("전화번호와 비밀번호를 입력해주세요.");
+            return;
+        }
+
+        // 2. 서비스 호출 (로그인 시도)
+        MemberDTO member = memberService.login(phone, pw);
+
+        // 3. 결과 처리
+        if (member != null) {
+    JOptionPane.showMessageDialog(this, member.getName() + "님 환영합니다!");
+    
+    // ★ 중요: 여기서 member 정보를 같이 넘겨줍니다!
+    frame.showMainPanel(member); 
+        }       else {
+            lblError.setForeground(java.awt.Color.RED);
+            lblError.setText("전화번호가 없거나 비밀번호가 틀렸습니다.");
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

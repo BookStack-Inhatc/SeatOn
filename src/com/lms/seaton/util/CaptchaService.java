@@ -10,9 +10,8 @@ import nl.captcha.noise.CurvedLineNoiseProducer;
 public class CaptchaService {
     private Captcha captcha;
     private JLabel imageLabel;     // 이미지를 보여줄 라벨
-    private JTextField inputField; // 입력받을 텍스트 필드 (필요시 초기화용)
     
-    public CaptchaService(JLabel imageLabel, JButton refreshButton) {
+    public CaptchaService(JLabel imageLabel, JTextField inputField, JButton refreshButton, JLabel messageLabel) {
         this.imageLabel = imageLabel;
         
         generateCaptcha();
@@ -35,6 +34,10 @@ public class CaptchaService {
     }
     
     public boolean isCorrect(String answer) {
-        return captcha.isCorrect(answer);
+        return captcha != null && answer != null && captcha.isCorrect(answer);
+    }
+    
+    public void refresh() {
+        generateCaptcha();
     }
 }

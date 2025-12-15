@@ -1,5 +1,6 @@
 package com.lms.seaton.view;
 
+import com.lms.seaton.dto.MemberDTO; 
 import com.lms.seaton.view.panel.LoginPanel;
 import com.lms.seaton.view.panel.MainPanel;
 import com.lms.seaton.view.panel.SignUpPanel;
@@ -35,13 +36,13 @@ public class MainFrame extends javax.swing.JFrame {
         startPanel = new StartPanel(this);
         signUpPanel = new SignUpPanel(this);    // 회원 가입 패널을 생성할 때 프레임 정보를 알려줌 
         loginPanel = new LoginPanel(this);      // 로그인 패널을 생성할 때 프레임 정보를 알려줌
-        mainPanel = new MainPanel(this);
+        //mainPanel = new MainPanel(this);
         
         // ------- 패널 등록 -------
         contentPane.add(startPanel, "START");
         contentPane.add(signUpPanel, "SIGNUP");    // 컨테이너에 생성된 회원 가입 패널 등록
         contentPane.add(loginPanel, "LOGIN");       // 컨테이너에 생성된 로그인 패널 등록
-        contentPane.add(mainPanel, "MAIN");
+        //contentPane.add(mainPanel, "MAIN");
 
         // ------- 시작 화면 --------
         cardLayout.show(contentPane, "START");      // show 메서드로 보여줄 화면을 지정
@@ -91,6 +92,22 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
         cardLayout.show(contentPane, previousPanelName);
+    }
+    public void showMainPanel(MemberDTO member) {
+        // 1. 기존 패널들(로그인, 시작화면 등)을 싹 지우고 메인 화면만 남깁니다.
+        // (로그인 성공했으므로 뒤로가기로 로그인창 갈 필요가 없음)
+        this.getContentPane().removeAll();
+
+        // 2. 로그인한 회원 정보를 담아서 메인 패널을 새로 만듭니다.
+        MainPanel mainPanel = new MainPanel(this, member);
+
+        // 3. 화면에 붙입니다.
+        this.add(mainPanel);
+
+        // 4. 화면을 새로고침해서 보여줍니다.
+        this.revalidate();
+        this.repaint();
+        this.pack(); // 창 크기를 내용물에 맞게 자동 조절
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

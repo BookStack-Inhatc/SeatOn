@@ -2,12 +2,15 @@ package com.lms.seaton.view.panel;
 
 import com.lms.seaton.util.CaptchaService;
 import com.lms.seaton.view.MainFrame;
+import com.lms.seaton.service.MemberService; // [필수] 서비스 임포트
+import java.awt.Color;
+import javax.swing.JOptionPane;
 
 
 public class SignUpPanel extends javax.swing.JPanel {
     private MainFrame frame;
     private CaptchaService captchaService;
-
+    private MemberService memberService = new MemberService();
 
     public SignUpPanel() {
         
@@ -15,7 +18,7 @@ public class SignUpPanel extends javax.swing.JPanel {
 
     public SignUpPanel(MainFrame frame) {
         initComponents();
-        
+        this.frame = frame;
         captchaService = new CaptchaService(
         lblCaptchaImage,
         tbxCaptcha,
@@ -23,7 +26,11 @@ public class SignUpPanel extends javax.swing.JPanel {
         lblCaptchaMsg
         );
 
-        this.frame = frame;
+        lblPwConfirm.setText("");
+        lblCaptchaMsg.setText("");
+        
+        // 3. 캡차 새로고침 버튼에 기능 연결
+        btnCaptchaRefresh.addActionListener(evt -> captchaService.refresh());
     }
 
     @SuppressWarnings("unchecked")
@@ -191,18 +198,56 @@ public class SignUpPanel extends javax.swing.JPanel {
         frame.goBack();
     }//GEN-LAST:event_btnGoBackActionPerformed
 
+    
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        String answer = tbxCaptcha.getText().trim();
+        String name = tbxName.getText().trim();
+        String phone = tbxNumber.getText().trim();
+        String pw = tbxPw.getText().trim();
+        String pwCheck = tbxPwCheck.getText().trim();
+        String captchaAnswer = tbxCaptcha.getText().trim();
 
-        if (!captchaService.isCorrect(answer)) {
-            lblCaptchaMsg.setText("캡차가 틀렸습니다.");
+        // 1. 캡차 검증 (가장 먼저!)
+        if (!captchaService.isCorrect(captchaAnswer)) {
+            lblCaptchaMsg.setForeground(Color.RED);
+            lblCaptchaMsg.setText("보안 문자가 틀렸습니다.");
             tbxCaptcha.setText("");
-            captchaService.refresh();
+            captchaService.refresh(); // 틀리면 문자 새로고침
+            return;
+        } else {
+            lblCaptchaMsg.setForeground(Color.BLUE);
+            lblCaptchaMsg.setText("보안 문자 확인 완료!");
+        }
+
+        // 2. 빈칸 검사
+        if (name.isEmpty() || phone.isEmpty() || pw.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "모든 정보를 입력해주세요.");
             return;
         }
 
-        lblCaptchaMsg.setText("통과!");
-        // 여기부터 기존 로그인/회원가입 로직 실행
+        // 3. 비밀번호 일치 검사
+        if (!pw.equals(pwCheck)) {
+            lblPwConfirm.setForeground(Color.RED);
+            lblPwConfirm.setText("비밀번호가 일치하지 않습니다.");
+            return;
+        } else {
+            lblPwConfirm.setText("");
+        }
+
+        // 4. 전화번호 중복 확인 (입력완료 버튼이 없으므로 여기서 수행)
+        if (memberService.checkDuplicatePhone(phone)) {
+            JOptionPane.showMessageDialog(this, "이미 가입된 전화번호입니다.");
+            return;
+        }
+
+        // 5. 실제 가입 시도
+        boolean isSuccess = memberService.registerMember(name, phone, pw);
+
+        if (isSuccess) {
+            JOptionPane.showMessageDialog(this, "회원가입 성공! 로그인 해주세요.");
+            frame.goBack(); // 로그인 화면으로 이동
+        } else {
+            JOptionPane.showMessageDialog(this, "오류가 발생했습니다. 다시 시도해주세요.");
+        }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 

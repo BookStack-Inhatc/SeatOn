@@ -1,4 +1,5 @@
 # DB Connection Information for JDBC
+# DB Connection Information for JDBC
 DB_URL=URL 정보 입력
 DB_USER=계정 입력
 DB_PASSWORD=비밀번호 입력

@@ -18,7 +18,7 @@ public class StartPanel extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
@@ -101,18 +101,18 @@ public class StartPanel extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(42, Short.MAX_VALUE))
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {                                          
         frame.showCard("SIGNUP");
-    }//GEN-LAST:event_btnSignUpActionPerformed
+    }                                         
 
-    private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginActionPerformed
+    private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {                                         
         frame.showCard("LOGIN");
-    }//GEN-LAST:event_BtnLoginActionPerformed
+    }                                        
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton BtnLogin;
     private javax.swing.JButton btnGoBack;
     private javax.swing.JButton btnGoBack1;
@@ -125,6 +125,6 @@ public class StartPanel extends javax.swing.JPanel {
     private javax.swing.JPanel top;
     private javax.swing.JPanel top1;
     private javax.swing.JPanel top2;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 
 }

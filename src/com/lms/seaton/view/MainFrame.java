@@ -1,16 +1,12 @@
 package com.lms.seaton.view;
 
 import com.lms.seaton.dto.MemberDTO; 
-//import com.lms.seaton.view.panel.LoginPanel;
 import com.lms.seaton.view.panel.MainPanel;
-//import com.lms.seaton.view.panel.SignUpPanel;
-//import com.lms.seaton.view.panel.StartPanel;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.util.Stack;
 
-
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame { 
 //    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
     private MemberDTO loggedInMember;
     private Stack<String> historyStack;
@@ -31,16 +27,9 @@ public class MainFrame extends javax.swing.JFrame {
         cardLayout = new CardLayout();  // 레이아웃 관리 클래스
         contentPane = getContentPane(); // 컨테이너
         contentPane.setLayout(cardLayout);  // 컨테이너에 레이아웃 관리 클래스를 등록 -> 이 과정으로 화면 전환이 가능하게 됨.
-        // ------- 패널 인스턴스 생성 -------
-//        mainPanel = new MainPanel(this);
-        
-        // ------- 패널 등록 -------
-//        contentPane.add(mainPanel, "MAIN");
 
-        // ------- 시작 화면 --------
-        
-//        setSize(WIDTH, HEIGHT);
         showMainPanel(loggedInMember);
+
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -49,7 +38,6 @@ public class MainFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -86,6 +74,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         cardLayout.show(contentPane, previousPanelName);
     }
+  
     public void showMainPanel(MemberDTO member) {
         // 1. 로그인한 회원 정보를 담아서 메인 패널을 새로 만듭니다.
         // 기존에 등록된 mainPanel이 있으면 제거해서 중복 추가를 방지합니다.
@@ -126,8 +115,6 @@ public class MainFrame extends javax.swing.JFrame {
 //        revalidate();
 //        repaint();
     }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

@@ -26,7 +26,7 @@ public class MainPanel extends javax.swing.JPanel {
 
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         top = new javax.swing.JPanel();
@@ -859,11 +859,11 @@ public class MainPanel extends javax.swing.JPanel {
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("tab3");
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {                                          
         frame.logout();
-    }//GEN-LAST:event_btnLogoutActionPerformed
+    }                                         
 
     private void initButtonActions() {
         // 1. 자유석 탭 (jPanel1)의 모든 버튼 설정
@@ -970,7 +970,7 @@ public class MainPanel extends javax.swing.JPanel {
     }
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton btnLocker1;
     private javax.swing.JButton btnLocker10;
     private javax.swing.JButton btnLocker11;
@@ -1061,5 +1061,5 @@ public class MainPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel top;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }

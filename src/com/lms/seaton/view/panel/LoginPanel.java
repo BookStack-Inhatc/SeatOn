@@ -29,7 +29,7 @@ public class LoginPanel extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -145,13 +145,13 @@ public class LoginPanel extends javax.swing.JPanel {
         jPanel1.getAccessibleContext().setAccessibleName("");
 
         getAccessibleContext().setAccessibleName("LOGIN");
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
+    private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {                                          
         frame.goBack();
-    }//GEN-LAST:event_btnGoBackActionPerformed
+    }                                         
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {                                         
        String phone = tbxNumber.getText().trim(); 
         
         // [수정 4] getPassword() -> getText() 로 변경 (JTextField를 사용중이므로)
@@ -178,10 +178,10 @@ public class LoginPanel extends javax.swing.JPanel {
             lblError.setForeground(java.awt.Color.RED);
             lblError.setText("전화번호가 없거나 비밀번호가 틀렸습니다.");
         }
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }                                        
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton btnGoBack;
     private javax.swing.JButton btnLogin;
     private javax.swing.JPanel jPanel1;
@@ -193,5 +193,5 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JTextField tbxNumber;
     private javax.swing.JTextField tbxPw;
     private javax.swing.JPanel top;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }

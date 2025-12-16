@@ -35,7 +35,7 @@ public class SignUpPanel extends javax.swing.JPanel {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -195,14 +195,14 @@ public class SignUpPanel extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
+    private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {                                          
         frame.goBack();
-    }//GEN-LAST:event_btnGoBackActionPerformed
+    }                                         
 
     
-    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {                                          
         String name = tbxName.getText().trim();
         String phone = tbxNumber.getText().trim();
         String pw = tbxPw.getText().trim();
@@ -251,10 +251,10 @@ public class SignUpPanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(this, "오류가 발생했습니다. 다시 시도해주세요.");
         }
-    }//GEN-LAST:event_btnSubmitActionPerformed
+    }                                         
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton btnCaptchaRefresh;
     private javax.swing.JButton btnGoBack;
     private javax.swing.JButton btnSubmit;
@@ -275,5 +275,5 @@ public class SignUpPanel extends javax.swing.JPanel {
     private javax.swing.JTextField tbxPw;
     private javax.swing.JTextField tbxPwCheck;
     private javax.swing.JPanel top;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 }

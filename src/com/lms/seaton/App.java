@@ -4,7 +4,6 @@ package com.lms.seaton;
     로그인 프레임을 시작 화면으로 설정함
 */
 import com.lms.seaton.view.LoginFrame;
-//import com.lms.seaton.view.MainFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 

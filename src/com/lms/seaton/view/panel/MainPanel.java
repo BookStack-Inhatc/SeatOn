@@ -9,7 +9,7 @@ public class MainPanel extends javax.swing.JPanel {
     private com.lms.seaton.dto.MemberDTO loggedInUser;
     private com.lms.seaton.dao.ReservationDAO reservationDAO = new com.lms.seaton.dao.ReservationDAO();
 
-    public MainPanel() {
+    public MainPanel(MainFrame aThis) {
         
     }
 

@@ -1,16 +1,17 @@
 package com.lms.seaton.view.panel;
 
-import com.lms.seaton.view.MainFrame;
+import com.lms.seaton.view.LoginFrame;
+//import com.lms.seaton.view.MainFrame;
 /*
     
 */
 public class StartPanel extends javax.swing.JPanel {
-    private MainFrame frame;
+    private LoginFrame frame;
 
     public StartPanel() {
     }
 
-    public StartPanel(MainFrame frame) {
+    public StartPanel(LoginFrame frame) {
         this.frame = frame;
         initComponents();
         System.out.println("START PANEL ACTIVE");

@@ -1,10 +1,10 @@
 package com.lms.seaton.view;
 
 import com.lms.seaton.dto.MemberDTO; 
-import com.lms.seaton.view.panel.LoginPanel;
+//import com.lms.seaton.view.panel.LoginPanel;
 import com.lms.seaton.view.panel.MainPanel;
-import com.lms.seaton.view.panel.SignUpPanel;
-import com.lms.seaton.view.panel.StartPanel;
+//import com.lms.seaton.view.panel.SignUpPanel;
+//import com.lms.seaton.view.panel.StartPanel;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.util.Stack;
@@ -12,6 +12,7 @@ import java.util.Stack;
 
 public class MainFrame extends javax.swing.JFrame {
 //    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
+    private MemberDTO loggedInMember;
     private Stack<String> historyStack;
     
     // 레이아웃
@@ -19,13 +20,11 @@ public class MainFrame extends javax.swing.JFrame {
     private Container contentPane;
     
     // 패널 목록
-    private StartPanel startPanel;
-    private SignUpPanel signUpPanel;
-    private LoginPanel loginPanel;
     private MainPanel mainPanel;
     
-    public MainFrame() {
+    public MainFrame(MemberDTO member) {
         initComponents();
+        this.loggedInMember = member;
         historyStack = new Stack<>();   
                 
         setTitle("SeatOn");   // 프레임의 타이틀 세팅
@@ -33,21 +32,15 @@ public class MainFrame extends javax.swing.JFrame {
         contentPane = getContentPane(); // 컨테이너
         contentPane.setLayout(cardLayout);  // 컨테이너에 레이아웃 관리 클래스를 등록 -> 이 과정으로 화면 전환이 가능하게 됨.
         // ------- 패널 인스턴스 생성 -------
-        startPanel = new StartPanel(this);
-        signUpPanel = new SignUpPanel(this);    // 회원 가입 패널을 생성할 때 프레임 정보를 알려줌 
-        loginPanel = new LoginPanel(this);      // 로그인 패널을 생성할 때 프레임 정보를 알려줌
-        //mainPanel = new MainPanel(this);
+//        mainPanel = new MainPanel(this);
         
         // ------- 패널 등록 -------
-        contentPane.add(startPanel, "START");
-        contentPane.add(signUpPanel, "SIGNUP");    // 컨테이너에 생성된 회원 가입 패널 등록
-        contentPane.add(loginPanel, "LOGIN");       // 컨테이너에 생성된 로그인 패널 등록
-        //contentPane.add(mainPanel, "MAIN");
+//        contentPane.add(mainPanel, "MAIN");
 
         // ------- 시작 화면 --------
-        cardLayout.show(contentPane, "START");      // show 메서드로 보여줄 화면을 지정
         
 //        setSize(WIDTH, HEIGHT);
+        showMainPanel(loggedInMember);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -73,9 +66,9 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> new MainFrame().setVisible(true));
-    }
+//    public static void main(String args[]) {
+//        java.awt.EventQueue.invokeLater(() -> new MainFrame(member).setVisible(true));
+//    }
     
     public void showCard(String path) {
         historyStack.push(path);
@@ -114,8 +107,8 @@ public class MainFrame extends javax.swing.JFrame {
     
     public void logout() {
         // 1) 로그인 패널의 입력 필드 초기화
-        if (loginPanel != null) {
-            loginPanel.clearFields();
+        if (loggedInMember != null) {
+            loggedInMember = null;
         }
 
         // 2) 메인 패널이 있다면 제거하여 상태 정리
@@ -126,11 +119,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         // 3) 카드 스택 및 화면 전환
         historyStack.clear();
-        historyStack.push("LOGIN");
-        cardLayout.show(contentPane, "LOGIN");
+//        historyStack.push("MAIN");
+//        cardLayout.show(contentPane, "LOGIN");
+        dispose();
 
-        revalidate();
-        repaint();
+//        revalidate();
+//        repaint();
     }
 
 

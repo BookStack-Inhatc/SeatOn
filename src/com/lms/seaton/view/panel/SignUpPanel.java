@@ -1,14 +1,15 @@
 package com.lms.seaton.view.panel;
 
 import com.lms.seaton.util.CaptchaService;
-import com.lms.seaton.view.MainFrame;
+//import com.lms.seaton.view.MainFrame;
 import com.lms.seaton.service.MemberService; // [필수] 서비스 임포트
+import com.lms.seaton.view.LoginFrame;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
 
 public class SignUpPanel extends javax.swing.JPanel {
-    private MainFrame frame;
+    private LoginFrame frame;
     private CaptchaService captchaService;
     private MemberService memberService = new MemberService();
 
@@ -16,7 +17,7 @@ public class SignUpPanel extends javax.swing.JPanel {
         
     }
 
-    public SignUpPanel(MainFrame frame) {
+    public SignUpPanel(LoginFrame frame) {
         initComponents();
         this.frame = frame;
         captchaService = new CaptchaService(

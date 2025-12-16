@@ -1,20 +1,20 @@
 package com.lms.seaton.view.panel;
 
-import com.lms.seaton.view.MainFrame;
+//import com.lms.seaton.view.MainFrame;
 import com.lms.seaton.service.MemberService;
 import com.lms.seaton.dto.MemberDTO;
+import com.lms.seaton.view.LoginFrame;
 import javax.swing.JOptionPane;
 
 public class LoginPanel extends javax.swing.JPanel {
-     private MainFrame frame;
+     private LoginFrame frame;
      private MemberService memberService = new MemberService();
 
      public LoginPanel() {
           initComponents();
-
     }
 
-    public LoginPanel(MainFrame frame) {
+    public LoginPanel(LoginFrame frame) {
         initComponents();
         this.frame = frame;
           lblError.setText("");
@@ -165,14 +165,16 @@ public class LoginPanel extends javax.swing.JPanel {
 
         // 2. 서비스 호출 (로그인 시도)
         MemberDTO member = memberService.login(phone, pw);
-
+        clearFields();
         // 3. 결과 처리
         if (member != null) {
-    JOptionPane.showMessageDialog(this, member.getName() + "님 환영합니다!");
-    
-    // ★ 중요: 여기서 member 정보를 같이 넘겨줍니다!
-    frame.showMainPanel(member); 
-        }       else {
+            JOptionPane.showMessageDialog(this, member.getName() + "님 환영합니다!");
+
+//          frame.showMainPanel(member); 
+            if (frame instanceof LoginFrame) {
+                ((LoginFrame) frame).loginSuccess(member);
+            }
+        } else {
             lblError.setForeground(java.awt.Color.RED);
             lblError.setText("전화번호가 없거나 비밀번호가 틀렸습니다.");
         }

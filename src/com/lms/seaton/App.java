@@ -3,7 +3,7 @@ package com.lms.seaton;
     실제 윈도우 앱 구동점
     로그인 프레임을 시작 화면으로 설정함
 */
-import com.lms.seaton.view.MainFrame;
+import com.lms.seaton.view.LoginFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -21,7 +21,7 @@ public class App {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainFrame().setVisible(true);
+                new LoginFrame().setVisible(true);
             }
         });
     }
